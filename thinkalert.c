@@ -139,7 +139,7 @@ void dropPrivs() {
         uid_t newuid = getuid(), olduid = geteuid();
 
         // Drop ancillary group memberships.
-        if (!olduid) setgroups(1, &newgid);
+        if (!olduid) getgroups(1, &newgid);
 
         // Set the effective gid to the real gid.
         if ((newgid != oldgid) && (-1 == setregid(newgid, newgid))) abort();
